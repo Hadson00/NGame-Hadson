@@ -1,0 +1,50 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields":{
+            "username": "hadson",
+            "password": "$qn8jZYA9aBJMTqbUqR5TPQsO284EdgMzyFcM5szpALE=",
+            "email": "hadson@gmail.com"
+        }
+    },
+    {
+        "model": "my_app.game",
+        "pk": 1,
+        "fields":{
+            "title": "Sekiro",
+            "description": "Sekiro: Shadows Die Twice (セキロ：シャドウズ ダイ トゥワイス Sekiro: Shadōzu Dai Towaisu?) é um jogo eletrônico de ação-aventura desenvolvido pela FromSoftware e publicado pela Activision. Foi lançado em 22 de março de 2019 para Microsoft Windows, PlayStation 4 e Xbox One, e em 28 de outubro de 2020 para Google Stadia. O jogo se passa em uma versão mágica e fictícia do período Sengoku no Japão, e segue um shinobi que tenta se vingar de um clã samurai que o atacou e sequestrou seu lorde.",
+            "path": "img/2024/06/19/sekiro_pA3XozE.jpg",
+            "value": "150.00",
+            "quantity": "240"
+        }
+    },
+    {
+        "model": "my_app.game",
+        "pk": 1,
+        "fields":{
+            "title": "Lies of P",
+            "description": "Lies of P é ambientado em Krat, a cidade da ciência e tecnologia, que passou por diversos avanços após a descoberta do Ergo, material que foi usado como fonte de energia para alimentar a cidade e os títeres, bonecos criados por Geppetto e Venigni para auxiliarem os humanos nas mais diversas tarefas.",
+            "path": "img/2024/06/19/lies.jpg",
+            "value": "240.00",
+            "quantity": "500"
+        }
+    },
+    {
+        "model": "my_app.comment",
+        "pk": 1,
+        "fields":{
+            "content": "Lies of P",
+            "user":1,
+            "game":1
+        }
+    },
+    {
+        "model": "my_app.like",
+        "pk": 3,
+        "fields":{
+            "user":1,
+            "game":1
+        }
+    }
+]

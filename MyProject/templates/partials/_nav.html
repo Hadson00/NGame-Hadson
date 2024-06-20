@@ -1,0 +1,18 @@
+<section class="colornf">
+    <nav class="navbar navbar-expand-lg d-flex mx-5">
+        <div class="container-fluid">
+            <a style="color: white; font-family: Impact;" class="navbar-brand" href="{% url 'index' %}">GameCatalog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            {% if user.is_authenticated %}
+                <div class="collapse navbar-collapse justify-content-end px-5" id="navbarNav">
+                    <a style="font-family: 'Courier New';" class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                </div>
+                <a  style="font-family: Courier New;" class="nav-link" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <button style="font-family: Courier New;" class="nav-link btn" data-bs-toggle="modal" data-bs-target="#Login">Login</button>
+            {% endif %}
+        </div>
+    </nav>
+</section>

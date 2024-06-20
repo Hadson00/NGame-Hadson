@@ -1,0 +1,18 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+{% block title %}
+<title>Titulo da Página</title>
+{% endblock %}
+{% block content %}
+
+<!-- Card -->
+<div style="font-family: Courier New;" class="container py-4">
+    <h1 class="text-center py-3">Jogos</h1>
+    <div class="row">
+        {% include 'partials/_card.html' %}
+    </div>
+</div>
+</section>
+<hr style="margin: 0;">
+
+{% endblock %}
