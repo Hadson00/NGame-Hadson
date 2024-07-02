@@ -6,6 +6,8 @@
             <img src="{{game.games.path.url}}" class="card-img-top" alt="{{game.games.title}}">
             <div class="card-body">
                 <div style="justify-content: space-around; color: black; align-content: center;" class="d-flex">
+                    {% csrf_token %}
+                        <button class="btn btn-success" id="add-to-cart" data-id="{{item.game.id}}">Comprar</button>
                     <div class="card-body">
                         {% if game.liked %}
                             <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="auto" fill="red" stroke="red" class="bi bi-heart-fill" viewBox="-1 -1 18 16">
@@ -29,4 +31,30 @@
         </a>
     </div>
 </div>
+{% block script %}
+<script>
+    var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    document.addEventListener('DOMContentLoaded', function(){
+        var buttons = document.querySelectorAll('#add-to-cart');
+        buttons.forEach(function(button){
+            button.addEventListener('click', function(){
+                var id = this.dataset.id;
+                fetch('add_to_cart/'+ id +'/', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken
+                    }
+                }).then((response) => {
+                    return response.json();
+                }).then((data) => {
+                    console.log(data);
+            
+                    
+            });
+        });
+    });
+});
+</script>
+{% endblock %}
 {% endfor %}

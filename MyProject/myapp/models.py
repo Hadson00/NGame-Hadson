@@ -37,3 +37,17 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.user} on {self.game}'
+    
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Carrinho de {self.user.username}'
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete = models.CASCADE)
+    game = models.ForeignKey(Game, on_delete = models.CASCADE)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.game} no {self.cart}'
