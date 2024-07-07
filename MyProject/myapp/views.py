@@ -12,14 +12,14 @@ def home(request):
 
 def index(request):
     user = request.user    
-    game = Game.objects.all()
+    games = Game.objects.all()
     data_game = []
-    for games in game:
+    for game in games:
         data_game.append(    
             {
-            'games': games,
-            'liked': games.user_liked(user) if user.is_authenticated else False,
-            'comments': Comment.objects.filter(game=games)
+            'games': game,
+            'liked': game.user_liked(user) if user.is_authenticated else False,
+            'comments': Comment.objects.filter(game=game)
             }
         )
     return render(request, 'site/index.html', {'games': data_game})
@@ -75,27 +75,28 @@ def delete_game(request, game_id):
     return render(request, 'site/delete.html', {'game': game})
 
 def add_to_cart(request, game_id):
-    game = get_object_or_404(Game, id = game_id)
+    game = get_object_or_404(Game, id=game_id)
     cart, created = Cart.objects.get_or_create(user=request.user)
-    cart_item, created = CartItem.objects.get_or_create(cart=cart, game=game, quantity = 1)
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, game=game, quantity=1)
+    cart_count = CartItem.objects.filter(cart=cart).count() if request.user.is_authenticated else 0
     if not created:
         cart_item.quantity += 1
         cart_item.save()
-    return JsonResponse({'succes':'true', 'quantity': cart_item.quantity})
+    return JsonResponse({'success': 'true', 'quantity': cart_item.quantity, 'cart_count': cart_count})
 
 def remove_from_cart(request, game_id):
     cart_item = get_object_or_404(CartItem, id=game_id)
     cart_item.delete()
-    return JsonResponse({'succes':'true'})
+    return JsonResponse({'success': 'true'})
 
 def view_cart(request):
     cart, created = Cart.objects.get_or_create(user=request.user)
     items = CartItem.objects.filter(cart=cart)
-    return render(request, 'site/cart.html', {'cart':cart, 'items':items})
+    cart_count = CartItem.objects.filter(cart=cart).count() if request.user.is_authenticated else 0
+    return render(request, 'site/cart.html', {'cart': cart, 'items': items, 'cart_count': cart_count})
 
-def update_cart(request, game_id):
-    cart_item = get_object_or_404(CartItem,id=game_id)
-    
+def update_cart_item(request, game_id):
+    cart_item = get_object_or_404(CartItem, id=game_id)
     if request.method == 'POST':
         action = request.POST.get('action')
         if action == 'increase':
@@ -103,12 +104,14 @@ def update_cart(request, game_id):
         elif action == 'decrease' and cart_item.quantity > 1:
             cart_item.quantity -= 1
         cart_item.save()
-        return JsonResponse({'succes':'true', 'quantity':cart_item.quantity})
+        return JsonResponse({'success': 'true', 'quantity': cart_item.quantity})
 
 def checkout(request):
     cart, created = Cart.objects.get_or_create(user=request.user)
+    items = CartItem.objects.filter(cart=cart)
+    total_price = sum( item.quantity * item.game.value for item in items)
     if request.method == 'POST':
         cart.delete()
-        messages.succes(request,'Compra realizada com sucesso')
+        messages.success(request, 'Compra realizada com sucesso!')
         return redirect('index')
-    return render(request, 'site/checkout.html', {'cart':cart})
+    return render(request, 'site/checkout.html', {'cart': cart, 'total_price': total_price})

@@ -1,15 +1,13 @@
-{% load static %}
 {% for game in games %}
-
-<div class="modal fade" id="card{{game.games.id}}" data-bs-backdrop="static" tabindex="-1" aria-labelledby="card{{game.games.id}}" aria-hidden="true">
+<div class="modal fade" id="{{game.games.id}}" data-bs-backdrop="static" tabindex="-1" aria-labelledby="card{{game.games.id}}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
             <h1 class="modal-title fs-5" id="card{{game.games.id}}">{{game.games.title}}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center">
-                <img src="{{ game.games.path.url }}" alt="{{ game.games.title }}">
+            <div class="modal-body">
+                <img class="card-img-top" src="{{ game.games.path.url }}" alt="{{ game.games.title }}">
             </div>
             <hr>
             <div class="modal-body text-center">

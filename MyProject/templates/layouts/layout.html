@@ -12,22 +12,6 @@
         {% endblock %}
         {% block script %}
         {% endblock %}
-        <script>
-            var like = 0
-            function liked(){
-                btLike = document.getElementById('btLike')
-                if (like == 0){
-                    btLike = document.getElementById('btLike').querySelector('svg').style.fill='red';
-                    btLike = document.getElementById('btLike').querySelector('svg').style.stroke='red';
-                    like = 1;
-                }
-                else{
-                    btLike = document.getElementById('btLike').querySelector('svg').style.fill='#fff';
-                    btLike = document.getElementById('btLike').querySelector('svg').style.stroke='#000';
-                    like = 0
-                }
-            }
-        </script>
     </head>
 	<body>
         {% include "partials/_nav.html" %}
