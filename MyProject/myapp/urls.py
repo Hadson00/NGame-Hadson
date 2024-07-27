@@ -14,4 +14,7 @@ urlpatterns = [
     path('remove_from_cart/<int:game_id>', remove_from_cart, name='remove_from_cart'),
     path('update_cart/<int:game_id>', update_cart_item, name='update_cart'),
     path('checkout/', checkout, name='checkout'),
+    path('dashboard/', dashboard, name='dashboard'),
+    path('dashboard/game_list/', game_list, name='game_list'),
+    path('dashboard/user_list/', user_list, name='user_list'),
 ]

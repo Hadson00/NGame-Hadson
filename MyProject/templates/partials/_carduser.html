@@ -1,0 +1,12 @@
+{% load static %}
+{% for user in users %}
+<div class="col-sm-6 col-md-4 col-lg-2 mb-4">
+    <div class="card">
+        <img src="{% static 'assets/img/user.png' %}" alt="" width="50px" height="auto" class="mx-auto">
+        <div class="card-body">
+            <h5 class="card-title">{{ user.username }}</h5>
+            <p class="card-text"><strong>{{ user.email }}</strong></p>
+        </div>
+    </div>
+</div>
+{% endfor %}

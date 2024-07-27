@@ -1,0 +1,19 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid" style="padding: 0;">
+  <div class="d-flex">
+    <div>
+      {% include 'partials/_sidebar.html' %}
+    </div>
+    <div class="col-xl-10">
+      <div class="text-center">
+        <h2 class="py-4">Jogos No Catálogo</h2>
+        <div class="row justify-content-center">
+          {% include 'partials/_card.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

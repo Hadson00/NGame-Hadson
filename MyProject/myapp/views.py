@@ -115,3 +115,38 @@ def checkout(request):
         messages.success(request, 'Compra realizada com sucesso!')
         return redirect('index')
     return render(request, 'site/checkout.html', {'cart': cart, 'total_price': total_price})
+
+@login_required
+def dashboard(request):
+    user = request.user
+    users = User.objects.all()
+    games = Game.objects.all()
+    data_game = []
+    for game in games:
+        data_game.append(    
+            {
+            'games': game,
+            'liked': game.user_liked(user) if user.is_authenticated else False,
+            'comments': Comment.objects.filter(game=game)
+            }
+        )
+    return render(request, 'site/dashboard.html', {'games': data_game, 'users': users})
+
+def user_list(request):
+    users = User.objects.all()
+
+    return render(request, 'site/dash/user_list.html', {'users': users})
+
+def game_list(request):
+    user = request.user
+    games = Game.objects.all()
+    data_game = []
+    for game in games:
+        data_game.append(    
+            {
+            'games': game,
+            'liked': game.user_liked(user) if user.is_authenticated else False,
+            'comments': Comment.objects.filter(game=game)
+            }
+        )
+    return render(request, 'site/dash/game_list.html', {'games': data_game})
