@@ -1,6 +1,5 @@
-{% load static %}
 {% for game in games %}
-<div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+<div class="col-sm-6 col-md-4 col-lg-2 mb-4">
     <a data-bs-toggle="modal" data-bs-target="#{{game.games.id}}">
         <div class="card mb-4">
             <img class="card-img-top" src="{{ game.games.path.url }}" alt="{{ game.games.title }}">
@@ -34,36 +33,5 @@
             </div>
         </div>
     </a>
-    <div class="text-center">
-        <button class="btn btn-success" id="add-to-cart" data-id="{{game.games.id}}">Comprar</button>
-    </div>  
 </div>
 {% endfor %}
-{% block script %}
-<script>
-    var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    document.addEventListener('DOMContentLoaded', function(){
-        var buttons = document.querySelectorAll('#add-to-cart');
-        buttons.forEach(function(button){
-            button.addEventListener('click', function(){
-                var id = this.dataset.id;
-                fetch('add_to_cart/'+ id,{
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': csrftoken
-                    }
-                }).then((response) => {
-                    return response.json();
-                }).then((data) => {
-                    console.log(data);
-                    const cart_count = document.querySelector(`#cart_count`);
-                    cart_count.innerHTML = data.cart_count;
-                    alert('game adicionado ao carrinho com sucesso!');
-                    
-                });
-            });
-        });
-    });
-</script>
-{% endblock %}

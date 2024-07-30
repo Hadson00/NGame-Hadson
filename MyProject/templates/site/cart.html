@@ -57,7 +57,7 @@
         decreaseButtons.forEach(function(button){
             button.addEventListener('click', function(){
                 const id = this.dataset.id;
-                fetch('/update_cart/'+ id +'/', {
+                fetch('/update_cart/'+ id , {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -83,9 +83,8 @@
         removeButtons.forEach(function(button){
             button.addEventListener('click',function(){
                 const id = this.dataset.id;
-                fetch('/remove_from_cart/'+ id +'/', {
-                    method: 'GET',
-                    
+                fetch('/remove_from_cart/'+ id , {
+                    method: 'GET',  
                 }).then((response) => {
                     return response.json();
                 }).then((data) => {

@@ -1,19 +1,41 @@
 {% extends 'layouts/layout.html' %}
 {% load static %}
 {% block content %}
-<div class="container-fluid" style="padding: 0;">
-  <div class="d-flex">
-    <div>
-      {% include 'partials/_sidebar.html' %}
-    </div>
-    <div class="col-xl-10">
+{% if request.user.is_superuser %}
+<div class="container-fluid">
+  <div class="row">
+    {% include 'partials/_sidebar.html' %}
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="text-center">
         <h2 class="py-4">Jogos No Catálogo</h2>
         <div class="row justify-content-center">
-          {% include 'partials/_card.html' %}
+          {% include 'partials/_cardash.html' %}
         </div>
       </div>
-    </div>
+      <div class="text-center">
+        <a href="{% url 'create_game' %}" class="btn btn-success m-3">Add New Game</a>
+      </div>
+    </main>
   </div>
 </div>
+{% else %}
+<div class="container-fluid">
+  <div class="row">
+    {% include 'partials/_sidebaruser.html' %}
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="text-center">
+        <h2 class="py-4">Jogos No Catálogo</h2>
+        <div class="row justify-content-center">
+          {% include 'partials/_cardash.html' %}
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="{% url 'create_game' %}" class="btn btn-success m-3">Add New Game</a>
+      </div>
+    </main>
+  </div>
+</div>
+{% endif %}
 {% endblock %}

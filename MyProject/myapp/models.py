@@ -51,3 +51,11 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f'{self.game} no {self.cart}'
+    
+class Buy(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    data = models.DateField()
+
+    def __str__(self):
+        return f'{self.user} no {self.price}'

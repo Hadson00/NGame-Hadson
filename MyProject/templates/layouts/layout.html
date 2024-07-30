@@ -8,6 +8,7 @@
         {% endblock %}
         <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'assets/css/mystyle.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/dashboard.css'%}">
         {% block style %}
         {% endblock %}
         {% block script %}
@@ -21,6 +22,7 @@
         {% endblock %}
 
         <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="{% static 'assets/js/dashboard.js' %}"></script></body>
 
         {% include 'partials/_modal.html' %}
         {% include "partials/_footer.html" %}

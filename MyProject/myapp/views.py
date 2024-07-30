@@ -11,7 +11,7 @@ def home(request):
     return render(request, 'site/home.html', {'game': game})
 
 def index(request):
-    user = request.user    
+    user = request.user  
     games = Game.objects.all()
     data_game = []
     for game in games:
@@ -107,14 +107,16 @@ def update_cart_item(request, game_id):
         return JsonResponse({'success': 'true', 'quantity': cart_item.quantity})
 
 def checkout(request):
+    user = request.user
     cart, created = Cart.objects.get_or_create(user=request.user)
     items = CartItem.objects.filter(cart=cart)
     total_price = sum( item.quantity * item.game.value for item in items)
     if request.method == 'POST':
+        buy = Buy.objects.create(user=user,price=total_price)
         cart.delete()
         messages.success(request, 'Compra realizada com sucesso!')
         return redirect('index')
-    return render(request, 'site/checkout.html', {'cart': cart, 'total_price': total_price})
+    return render(request, 'site/checkout.html', {'cart': cart, 'total_price': total_price, 'buy':buy})
 
 @login_required
 def dashboard(request):
